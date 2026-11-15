@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102c50">
+
+<title>Learn Skills Online</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #202b3c;
+    line-height: 1.6;
+}
+
+/* HEADER */
+
+header {
+    background: #102c50;
+    color: white;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 7px;
+}
+
+nav button.active {
+    color: #45d5bd;
+    border-bottom: 2px solid #45d5bd;
+}
+
+/* PAGE SYSTEM */
+
+.page {
+    display: none;
+    min-height: 75vh;
+    padding: 65px 7%;
+    animation: fadeIn .35s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* HOME */
+
+.hero {
+    min-height: 75vh;
+    background: linear-gradient(
+        120deg,
+        #102c50,
+        #176c85
+    );
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.hero h1 {
+    font-size: clamp(35px, 6vw, 58px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #e0eaf4;
+    margin-bottom: 30px;
+}
+
+/* BUTTONS */
+
+.btn {
+    display: inline-block;
+    background: #16b99a;
+    color: white;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.btn:hover {
+    background: #10977e;
+}
+
+/* TITLES */
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    color: #102c50;
+}
+
+.section-title p {
+    color: #68758a;
+    margin-top: 8px;
+}
+
+/* COURSES */
+
+.courses-grid {
+    display: grid;
+    grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.course-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    transition: .2s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-icon {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.course-card h3 {
+    color: #102c50;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    color: #657286;
+    font-size: 14px;
+}
+
+.price {
+    color: #119b83;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* ABOUT */
+
+.about-container {
+    display: grid;
+    grid-template-columns:
+    repeat(auto-fit, minmax(270px, 1fr));
+    align-items: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.about-photo {
+    min-height: 300px;
+    background: #dce8f2;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #102c50;
+}
+
+.about-photo img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.about-text h2 {
+    font-size: 32px;
+    color: #102c50;
+    margin-bottom: 15px;
+}
+
+/* REGISTRATION */
+
+.signup-section {
+    background: #eaf1f8;
+}
+
+.signup-form {
+    background: white;
+    max-width: 550px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.07);
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #253b56;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccd5df;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #16b99a;
+    outline: none;
+}
+
+.signup-form button {
+    width: 100%;
+}
+
+/* CONTACT */
+
+.contact-container {
+    display: grid;
+    grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.05);
+}
+
+.contact-card h3 {
+    color: #102c50;
+    margin-bottom: 10px;
+}
+
+.contact-card p {
+    color: #68758a;
+    overflow-wrap: anywhere;
+}
+
+.contact-card a {
+    color: #119b83;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* PAGE NAVIGATION */
+
+.page-navigation {
+    background: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.page-navigation button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 7px;
+    background: #102c50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.page-navigation button:disabled {
+    background: #c4cbd4;
+    cursor: not-allowed;
+}
+
+.page-counter {
+    font-weight: bold;
+    color: #102c50;
+    font-size: 14px;
+}
+
+.progress-container {
+    height: 5px;
+    background: #dce4ed;
+    width: 100%;
+}
+
+.progress-bar {
+    height: 5px;
+    background: #16b99a;
+    width: 20%;
+    transition: width .3s ease;
+}
+
+/* FOOTER */
+
+footer {
+    background: #102c50;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 5px;
+    }
+
+    nav button {
+        font-size: 11px;
+    }
+
+    .page {
+        padding: 45px 5%;
+    }
+
+    .hero {
+        min-height: 75vh;
+    }
+
+    .page-navigation {
+        padding: 18px 5%;
+    }
+
+    .page-navigation button {
+        padding: 11px 15px;
+        font-size: 12px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        Learn Skills Online
+    </div>
+
+    <nav>
+        <button class="active" onclick="showPage(1)">Home</button>
+        <button onclick="showPage(2)">Courses</button>
+        <button onclick="showPage(3)">About</button>
+        <button onclick="showPage(4)">Join</button>
+        <button onclick="showPage(5)">Contact</button>
+    </nav>
+
+</header>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+
+<!-- PAGE 1: HOME -->
+
+<section class="page hero active" id="page1">
+
+    <div class="hero-content">
+
+        <h1>Learn Skills Online</h1>
+
+        <p>
+            Unlock your potential, develop practical skills
+            and build a brighter future through online learning.
+        </p>
+
+        <button class="btn" onclick="showPage(2)">
+            Explore Our Courses →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 2: COURSES -->
+
+<section class="page" id="page2">
+
+    <div class="section-title">
+
+        <h2>Our Courses</h2>
+
+        <p>
+            Discover skills that can help you grow.
+        </p>
+
+    </div>
+
+    <div class="courses-grid">
+
+        <div class="course-card">
+            <div class="course-icon">💻</div>
+            <h3>Computer Skills</h3>
+            <p>
+                Learn computer fundamentals,
+                office applications and digital skills.
+            </p>
+            <div class="price">Contact for fees</div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-icon">📊</div>
+            <h3>Business Management</h3>
+            <p>
+                Understand business operations,
+                planning and management.
+            </p>
+            <div class="price">Contact for fees</div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-icon">🌍</div>
+            <h3>English Language</h3>
+            <p>
+                Improve your writing,
+                communication and speaking skills.
+            </p>
+            <div class="price">Contact for fees</div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-icon">📱</div>
+            <h3>Digital Marketing</h3>
+            <p>
+                Explore social media,
+                online branding and digital promotion.
+            </p>
+            <div class="price">Contact for fees</div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-icon">💰</div>
+            <h3>Financial Literacy</h3>
+            <p>
+                Learn budgeting, saving
+                and basic financial management.
+            </p>
+            <div class="price">Contact for fees</div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-icon">🎨</div>
+            <h3>Graphic Design</h3>
+            <p>
+                Discover design principles
+                and creative digital tools.
+            </p>
+            <div class="price">Contact for fees</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 3: ABOUT -->
+
+<section class="page" id="page3"
+style="background:white;">
+
+    <div class="about-container">
+
+        <div class="about-photo">
+
+            <img
+                src="YOUR-PHOTO-URL"
+                alt="Learn Skills Online founder"
+                onerror="this.style.display='none';
+                this.parentElement.innerHTML='Your Profile Photo';"
+            >
+
+        </div>
+
+        <div class="about-text">
+
+            <h2>About Us</h2>
+
+            <p>
+                Welcome to Learn Skills Online,
+                a learning platform committed to helping
+                individuals develop useful knowledge
+                and practical skills.
+            </p>
+
+            <br>
+
+            <p>
+                Our goal is to make learning accessible,
+                convenient and meaningful for people
+                who want to improve their personal
+                and professional development.
+            </p>
+
+            <br>
+
+            <p>
+                We believe education creates opportunities
+                and that learning should never stop.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 4: REGISTRATION -->
+
+<section class="page signup-section" id="page4">
+
+    <div class="section-title">
+
+        <h2>Join Our Learning Community</h2>
+
+        <p>
+            Complete the registration form
+            to enquire about a course.
+        </p>
+
+    </div>
+
+    <form class="signup-form" id="registrationForm">
+
+        <div class="form-group">
+
+            <label for="fullname">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="fullname"
+                placeholder="Enter your full name"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="course">
+                Select Your Course
+            </label>
+
+            <select id="course" required>
+
+                <option value="">Choose a course</option>
+
+                <option>Computer Skills</option>
+                <option>Business Management</option>
+                <option>English Language</option>
+                <option>Digital Marketing</option>
+                <option>Financial Literacy</option>
+                <option>Graphic Design</option>
+
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn">
+            Submit Registration
+        </button>
+
+        <p id="formMessage"
+        style="text-align:center;margin-top:15px;font-size:13px;">
+        </p>
+
+        <p style="font-size:12px;color:#68758a;margin-top:15px;">
+            WhatsApp will open with your enquiry details.
+            Review the message before choosing to send it.
+        </p>
+
+    </form>
+
+</section>
+
+
+<!-- PAGE 5: CONTACT -->
+
+<section class="page" id="page5">
+
+    <div class="section-title">
+
+        <h2>Contact Us</h2>
+
+        <p>
+            We would love to hear from you.
+        </p>
+
+    </div>
+
+    <div class="contact-container">
+
+        <div class="contact-card">
+
+            <div class="course-icon">📱</div>
+
+            <h3>WhatsApp</h3>
+
+            <p>
+                <a href="https://wa.me/254716640476"
+                target="_blank"
+                rel="noopener">
+                    +254 716 640 476
+                </a>
+            </p>
+
+        </div>
+
+        <div class="contact-card">
+
+            <div class="course-icon">✉️</div>
+
+            <h3>Email</h3>
+
+            <p>YOUR EMAIL ADDRESS</p>
+
+        </div>
+
+        <div class="contact-card">
+
+            <div class="course-icon">📍</div>
+
+            <h3>Location</h3>
+
+            <p>Zimbabwe</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PREVIOUS / NEXT NAVIGATION -->
+
+<div class="page-navigation">
+
+    <button id="previousBtn"
+    onclick="changePage(-1)"
+    disabled>
+        ← Previous
+    </button>
+
+    <div class="page-counter" id="pageCounter">
+        Page 1 of 5
+    </div>
+
+    <button id="nextBtn"
+    onclick="changePage(1)">
+        Next →
+    </button>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Learn Skills Online.
+        All Rights Reserved.
+    </p>
+
+    <p>
+        Building Skills. Creating Opportunities.
+    </p>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+/* PAGE NAVIGATION */
+
+let currentPage = 1;
+
+const totalPages = 5;
+
+function showPage(pageNumber) {
+
+    if (pageNumber < 1 || pageNumber > totalPages) {
+        return;
+    }
+
+    currentPage = pageNumber;
+
+    // Hide all pages
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    // Display selected page
+
+    document.getElementById("page" + currentPage)
+    .classList.add("active");
+
+    // Update navigation buttons
+
+    document.getElementById("previousBtn").disabled =
+        currentPage === 1;
+
+    document.getElementById("nextBtn").disabled =
+        currentPage === totalPages;
+
+    // Update page counter
+
+    document.getElementById("pageCounter").textContent =
+        "Page " + currentPage + " of " + totalPages;
+
+    // Update progress bar
+
+    document.getElementById("progressBar").style.width =
+        (currentPage / totalPages * 100) + "%";
+
+    // Update active navigation link
+
+    document.querySelectorAll("nav button").forEach(
+        (button, index) => {
+
+            button.classList.toggle(
+                "active",
+                index + 1 === currentPage
+            );
+
+        }
+    );
+
+    // Return to top
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+/* NEXT AND PREVIOUS */
+
+function changePage(direction) {
+
+    showPage(currentPage + direction);
+
+}
+
+
+/* WHATSAPP REGISTRATION */
+
+const WHATSAPP_NUMBER = "254716640476";
+
+document.getElementById("registrationForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("fullname").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const course =
+        document.getElementById("course").value;
+
+    const message =
+        document.getElementById("formMessage");
+
+    if (!name || !phone || !course) {
+
+        message.style.color = "red";
+
+        message.textContent =
+            "Please complete all fields.";
+
+        return;
+
+    }
+
+    const whatsappMessage =
+
+        "Hello, I would like to enquire about registration.\n\n" +
+
+        "Name: " + name + "\n" +
+
+        "Phone: " + phone + "\n" +
+
+        "Selected Course: " + course;
+
+    const whatsappURL =
+
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(whatsappMessage);
+
+    message.style.color = "#119b83";
+
+    message.textContent =
+        "Opening WhatsApp...";
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+});
+
+</script>
+
+</body>
+  </html>
+  
